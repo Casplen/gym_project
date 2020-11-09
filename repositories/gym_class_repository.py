@@ -11,8 +11,7 @@ def save(gym_class):
     sql = "INSERT INTO gym_classes (type, date, time, capacity, duration) VALUES (%s, %s, %s, %s, %s) RETURNING *"
     values = [gym_class.type, gym_class.date, gym_class.time, gym_class.capacity, gym_class.duration]
     results = run_sql(sql, values)
-    id = results[0]["id"]
-    gym_class.id = id
+    gym_class.id = results[0]["id"]
     return gym_class
 
 def delete_all():
