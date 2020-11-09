@@ -34,3 +34,20 @@ def select_all():
         member = Member(row["first_name"], row["last_name"], row["type"], row["start_date"], row["active_status"], row["id"])
         members.append(member)
     return members
+
+def select(id):
+    member = None
+
+    sql = "SELECT * FROM members WHERE id = %s"
+    values = [id]
+    result = run_sql(sql, values)[0]
+
+    if result is not None:
+        member = Member(result["first_name"], result["last_name"], result["type"], result["start_date"], row["active_status"], row["id"])
+    return member
+
+def update(member):
+    sql = "UPDATE members SET (first_name, last_name, type, start_date, active_status) = (%s, %s, %s, %s, %s) WHERE id = %s"
+    values = [member.first_name, member.last_name, member.type, member.start_date, member.active_status, member.id]
+    run_sql(sql, values)
+    
