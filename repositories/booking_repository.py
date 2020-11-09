@@ -13,3 +13,44 @@ def save(booking):
     results = run_sql(sql, values)
     booking.id = results[0]['id']
     return booking
+
+def delete_all():
+    sql = "DELETE FROM bookings"
+    run_sql(sql)
+
+def delete(id):
+    sql = "DELETE FROM bookings WHERE id = %s"
+    values = [id]
+    run_sql(sql, values)
+
+def select_all():
+    bookings = []
+
+    sql = "SELECT * FROM bookings"
+    results = run_sql(sql)
+
+    for row in results:
+        member = member_repository.select(row["member_id"])
+        gym_class = gym_class_repository.select(row["gym_class_id"])
+        booking = Booking(member, gym_class, row["id"])
+
+        bookings.append(booking)
+    return bookings
+
+def select(id):
+    booking = None
+
+    sql = "SELECT * FROM bookings WHERE id = %s"
+    values = [id]
+    result = run_sql(sql, values)[0]
+
+    if result is not None:
+        member = member_repository.select(result["member_id"])
+        gym_class = gym_class_repository.select(result["gym_class_id"])
+        booking = Booking(member, gym_class, result["id"])
+    return booking
+
+def update(booking):
+    sql = "UPDATE bookings SET (member_id, gym_class_id) VALUES (%s, %s) WHERE id = %s"
+    values = [booking.member.id, booking.gym_class.id, booking.id]
+    run_sql(sql, values)
