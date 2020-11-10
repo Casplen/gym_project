@@ -10,6 +10,11 @@
             <p>Time: {{gym_class.time}}</p>
             <p>Capacity: {{gym_class.capacity}}</p>
             <p>Duration: {{gym_class.duration}} mins</p>
+            <p>Members booked: 
+            {% for member in members %}
+                {{member.first_name}} {{member.last_name}}
+            {% endfor %}
+            </p>
         </div>
         <div class="show-buttons">
             <form action="/gym_classes/{{gym_class.id}}/edit">

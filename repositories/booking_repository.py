@@ -54,3 +54,15 @@ def update(booking):
     sql = "UPDATE bookings SET (member_id, gym_class_id) VALUES (%s, %s) WHERE id = %s"
     values = [booking.member.id, booking.gym_class.id, booking.id]
     run_sql(sql, values)
+
+def members(gym_class_id):
+    # When given a class ID, return the list of members with bookings for that class.
+    members = []
+    sql = "SELECT members.* FROM members INNER JOIN bookings ON members.id = bookings.member_id WHERE bookings.gym_class_id = %s"
+    values = [gym_class_id]
+    results = run_sql(sql, values)
+
+    for row in results:
+        member = Member(row["first_name"], row["last_name"], row["type"], row["start_date"], row["active_status"], row["id"])
+        members.append(member)
+    return members

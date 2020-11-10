@@ -36,8 +36,8 @@ def add_gym_class():
 @gym_classes_blueprint.route("/gym_classes/<id>")
 def show(id):
     gym_class = gym_class_repository.select(id)
-    # members booked goes here
-    return render_template("gym_classes/show.html", gym_class = gym_class)
+    members = booking_repository.members(id)
+    return render_template("gym_classes/show.html", gym_class = gym_class, members = members)
 
 @gym_classes_blueprint.route("/gym_classes/<id>/edit")
 def edit_gym_class(id):
