@@ -1,6 +1,10 @@
 from flask import Flask, render_template
 
+from controllers.gym_class_controller import gym_classes_blueprint
+
 app = Flask(__name__)
+
+app.register_blueprint(gym_classes_blueprint)
 
 @app.route('/')
 def home():

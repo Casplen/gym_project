@@ -7,6 +7,17 @@ def new_type(type):
     values = [type]
     run_sql(sql, values)
 
+def select_types():
+    membership_types = []
+    sql= "SELECT * FROM membership_types"
+    results = run_sql(sql)
+    
+    for row in results:
+        membership_type = row["type"]
+        membership_types.append(membership_type)
+    
+    return membership_types
+
 def save(member):
     sql = "INSERT INTO members (first_name, last_name, type, start_date, active_status) VALUES (%s, %s, %s, %s, %s) RETURNING *"
     values = [member.first_name, member.last_name, member.type, member.start_date, member.active_status]
@@ -42,7 +53,7 @@ def select(id):
     result = run_sql(sql, values)[0]
 
     if result is not None:
-        member = Member(result["first_name"], result["last_name"], result["type"], result["start_date"], row["active_status"], row["id"])
+        member = Member(result["first_name"], result["last_name"], result["type"], result["start_date"], result["active_status"], result["id"])
     return member
 
 def update(member):

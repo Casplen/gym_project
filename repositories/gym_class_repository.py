@@ -7,6 +7,24 @@ def new_type(type):
     values = [type]
     results = run_sql(sql, values)
 
+def select_types():
+    class_types = []
+    sql= "SELECT * FROM class_types"
+    results = run_sql(sql)
+    
+    for row in results:
+        class_type = row["class_type"]
+        class_types.append(class_type)
+    
+    return class_types
+
+def check_type_exists(new_type):
+    existing_types = select_types()
+    for type in existing_types:
+        if new_type == type:
+            return True
+    return False
+
 def save(gym_class):
     sql = "INSERT INTO gym_classes (type, date, time, capacity, duration) VALUES (%s, %s, %s, %s, %s) RETURNING *"
     values = [gym_class.type, gym_class.date, gym_class.time, gym_class.capacity, gym_class.duration]
@@ -40,10 +58,10 @@ def select(id):
     result = run_sql(sql, values)[0]
 
     if result is not None:
-        gym_class = GymClass(result["type"], result["date"], result["time"], result["capacity"], row["duration"], row["id"])
+        gym_class = GymClass(result["type"], result["date"], result["time"], result["capacity"], result["duration"], result["id"])
     return gym_class
 
 def update(gym_class):
     sql = "UPDATE gym_classes SET (type, date, time, capacity, duration) = (%s, %s, %s, %s, %s) WHERE id = %s"
-    values = values = [gym_class.type, gym_class.date, gym_class.time, gym_class.capacity, gym_class.duration, gym_class.id]
+    values = [gym_class.type, gym_class.date, gym_class.time, gym_class.capacity, gym_class.duration, gym_class.id]
     run_sql(sql, values)

@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <header class="list-header">
+        <h2>Classes</h2>
+        <div class="header-buttons">
+            <form action="/gym_classes/new">
+                <button class="new-button">
+                    + New Class
+                </button>
+            </form>
+        </div>
+    </header>
+    <div class="list-container">
+    {% for gym_class in gym_classes %}
+        <a href="/gym_classes/{{gym_class.id}}">
+            <div class="list-box">
+                <div class="gym-class-info">
+                    <p>{{gym_class.type}} - {{gym_class.time}} - {{gym_class.date}}</p>
+                </div>
+                <div>
+                    <form action="">
+                        <button class="edit-button">
+                            Edit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+{% endblock %}

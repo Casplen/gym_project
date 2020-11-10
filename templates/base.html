@@ -3,16 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <title>Gym</title>
 </head>
 <body>
-    <h1>GYM</h1>
-    <main>
-        <section id="content">
-            {% block content %}
+    <header class="header">
+        <h1>GYM</h1>
+    </header>
+     <div id="sidebar" class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/gym_classes">Classes</a></li>
+                <li><a href="/members">Members</a></li>
+                <li><a href="/bookings">Bookings</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        {% block content %}
 
-            {% endblock%}
-        </section>
-    </main>
+        {% endblock%}
+    </div>
 </body>
 </html>
+
