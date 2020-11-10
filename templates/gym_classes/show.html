@@ -2,9 +2,26 @@
 
 {% block content %}
 <header class="list-header">
-    <h2> {{gym_class.type}} </h2>
+    <h2> {{gym_class.type}} - ID: {{gym_class.id}} </h2>
 </header>
     <div class="show-container">
-
+        <div class="show-info">
+            <p>Date: {{gym_class.date}}</p>
+            <p>Time: {{gym_class.time}}</p>
+            <p>Capacity: {{gym_class.capacity}}</p>
+            <p>Duration: {{gym_class.duration}} mins</p>
+        </div>
+        <div class="show-buttons">
+            <form action="/gym_classes/{{gym_class.id}}/edit">
+                <button class="edit-button">
+                    Edit Class
+                </button>
+            </form>
+            <form action="">
+                <button class="delete-button">
+                    Delete Class
+                </button>
+            </form>
+        </div>
     </div>
 {% endblock %}

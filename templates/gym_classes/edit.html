@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<header class="list-header">
+    <h2>Edit Class</h2>
+</header>
+    <div class="form-container">
+        <form action="/gym_classes/{{gym_class.id}}" method="POST" class="form">
+            <div>
+                <label for="gym_class_type">
+                    Type:
+                </label>
+                <input list="gym_class_types" name="gym_class_type" id="gym_class_type" value="{{gym_class.type}}" />
+                <datalist id="gym_class_types">
+                    {% for class_type in class_types %}
+                    <option value="{{class_type}}">
+                    {% endfor %}
+                </datalist>
+            </div>
+            <div>
+                <label for="date">
+                    Date:
+                </label>
+                <input type="date" id="date" name="date" value="{{gym_class.date}}">
+            </div>
+            <div>
+                <label for="time">
+                    Time:
+                </label>
+                <input type="time" id="time" name="time" value="{{gym_class.time}}">
+            </div>
+            <div>
+                <label for="capacity">
+                    Capacity:
+                </label>
+                <input type="number" id="capacity" name="capacity" value="{{gym_class.capacity}}">
+            </div>
+            <div>
+                <label for="duration">
+                    Duration (in minutes):
+                </label>
+                <input type="number" id="duration" name="duration" value="{{gym_class.duration}}">
+            </div>
+            <br>
+            <button type="submit">Submit</button>
+
+        </form>
+    </div>
+{% endblock %}
