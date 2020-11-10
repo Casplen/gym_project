@@ -41,6 +41,6 @@ CREATE TABLE bookings (
 CREATE TABLE gym_info (
     name VARCHAR(255),
     address TEXT,
-    phone INT,
+    phone varchar(250),
     email VARCHAR(255)
 )
