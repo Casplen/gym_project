@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <header class="list-header">
+        <h2>Bookings</h2>
+        <div class="header-buttons">
+            <form action="/bookings/new">
+                <button class="new-button">
+                    + New Booking
+                </button>
+            </form>
+        </div>
+    </header>
+    <div class="list-container">
+    {% for booking in bookings %}
+        <a href="/bookings/{{booking.id}}">
+            <div class="list-box">
+                <div class="booking-info">
+                    <p>{{booking.member.first_name}} {{booking.member.last_name}} - {{booking.gym_class.type}}, {{booking.gym_class.time}} {{booking.gym_class.date}}</p>
+                </div>
+                <div>
+                    <form action="/bookings/{{booking.id}}/edit">
+                        <button class="edit-button">
+                            Edit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+{% endblock %}

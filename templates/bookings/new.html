@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<header class="list-header">
+    <h2>New Booking</h2>
+</header>
+    <div class="form-container">
+        <form action="/bookings" method="POST" class="form">
+            <div>
+                <label for="member">
+                    Member:
+                </label>
+                <select id="member" name="member">
+                {% for member in members %}
+                    <option value={{member.id}}>ID: {{member.id}} - {{member.first_name}} {{member.last_name}} - {{member.type}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="gym_class">
+                    Class:
+                </label>
+                <select id="gym_class" name="gym_class">
+                {% for gym_class in gym_classes %}
+                    <option value={{gym_class.id}}>{{gym_class.type}} - {{gym_class.time}}, {{gym_class.date}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <br>
+            <button type="submit">Add Booking</button>
+
+        </form>
+    </div>
+{% endblock %}
