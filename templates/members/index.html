@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <header class="list-header">
+        <h2>Members</h2>
+        <div class="header-buttons">
+            <form action="/members/new">
+                <button class="new-button">
+                    + New Member
+                </button>
+            </form>
+        </div>
+    </header>
+    <div class="list-container">
+    {% for member in members %}
+        <a href="/member/{{member.id}}">
+            <div class="list-box">
+                <div class="member-info">
+                    <p>{{member.last_name}}, {{member.first_name}}</p>
+                    <p> Member ID - {{member.id}} </p>
+                </div>
+                <div>
+                    <form action="/members/{{member.id}}/edit">
+                        <button class="edit-button">
+                            Edit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -60,4 +60,7 @@ def update(member):
     sql = "UPDATE members SET (first_name, last_name, type, start_date, active_status) = (%s, %s, %s, %s, %s) WHERE id = %s"
     values = [member.first_name, member.last_name, member.type, member.start_date, member.active_status, member.id]
     run_sql(sql, values)
-    
+
+def member_count():
+    members = select_all()
+    return len(members)

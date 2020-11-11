@@ -56,7 +56,6 @@ def update(booking):
     run_sql(sql, values)
 
 def members(gym_class_id):
-    # When given a class ID, return the list of members with bookings for that class.
     members = []
     sql = "SELECT members.* FROM members INNER JOIN bookings ON members.id = bookings.member_id WHERE bookings.gym_class_id = %s"
     values = [gym_class_id]
@@ -66,3 +65,14 @@ def members(gym_class_id):
         member = Member(row["first_name"], row["last_name"], row["type"], row["start_date"], row["active_status"], row["id"])
         members.append(member)
     return members
+
+def gym_classes(member_id):
+    gym_classes = []
+    sql = "SELECT gym_classes.* FROM gym_classes INNER JOIN bookings ON gym_classes.id = bookings.gym_class_id WHERE bookings.member_id = %s"
+    values = [member_id]
+    results = run_sql(sql, values)
+
+    for row in results:
+        gym_class = GymClass(row['type'], row['date'], row['time'], row['capacity'], row['duration'], row['id'])
+        gym_classes.append(gym_class)
+    return gym_classes

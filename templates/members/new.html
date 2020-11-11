@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<header class="list-header">
+    <h2>New Member</h2>
+</header>
+    <div class="form-container">
+        <form action="/members" method="POST" class="form">
+            <div>
+                <label for="first_name">
+                    First Name:
+                </label>
+                <input type="text" id="first_name" name="first_name">
+            </div>
+            <div>
+                <label for="last_name">
+                    Last Name:
+                </label>
+                <input type="text" id="last_name" name="last_name">
+            </div>
+            <div>
+                <label for="start_date">
+                    Start Date:
+                </label>
+                <input type="date" id="start_date" name="start_date" value= {{date_today}}>
+            </div>
+            <div>
+                <label for="membership_type">
+                    Membership:
+                </label>
+                <select id="membership_type" name="membership_type">
+                    {% for membership_type in membership_types %}
+                    <option value= {{membership_type}}>{{membership_type}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <button type="submit">Add Member</button>
+
+        </form>
+    </div>
+{% endblock %}

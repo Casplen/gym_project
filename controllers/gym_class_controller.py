@@ -59,7 +59,10 @@ def update_gym_class(id):
     duration = request.form["duration"]
     edited_class = GymClass(class_type, date, time, capacity, duration, id)
     gym_class_repository.update(edited_class)
-    return redirect("/gym_classes")
+
+    redirect_gym_class = gym_class_repository.select(id)
+    redirect_class_types = gym_class_repository.select_types()
+    return redirect("/gym_classes/" + id)
 
 @gym_classes_blueprint.route("/gym_classes/<id>/delete", methods=['POST'])
 def delete_gym_class(id):

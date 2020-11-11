@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<header class="list-header">
+    <hgroup>
+        <h2> View Member </h2>
+        <h3> {{member.first_name}} {{member.last_name}}</h3>
+    </hgroup>
+</header>
+    <div class="show-container">
+        <div class="show-info">
+            <p>Membership: {{member.type}}</p>
+            <p>Start Date: {{member.start_date}}</p>
+            {% if member.active_status == True %}
+            <p>Status: Active</p>
+            {% else %}
+            <p>Status: Inactive</p>
+            {% endif %}
+            <p>Classes booked:
+            {% for gym_class in gym_classes %}
+            {{gym_class.type}} - {{gym_class.time}} - {{gym_class.date}}
+            {% endfor %}
+            {% if gym_classes == [] %}
+            None
+            {% endif %}
+            </p>
+        </div>
+        <div class="show-buttons">
+            <form action="/members/{{member.id}}/edit">
+                <button class="edit-button">
+                    Edit Details
+                </button>
+            </form>
+            <form action="/members/{{member.id}}/delete" method="POST">
+                <button class="delete-button">
+                    Delete Member
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
